@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "raksha-ai"
-version = "0.1.0"
+version = "0.1.1"
 description = "Framework-agnostic AI security SDK with comprehensive threat detection for LLMs and AI agents"
 readme = "README.md"
 requires-python = ">=3.9"
