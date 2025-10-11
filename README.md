@@ -32,13 +32,13 @@ Raksha is a comprehensive AI security SDK that detects threats in LLMs and AI ag
 pip install -e .
 
 # Or from PyPI (when published)
-pip install raksha
+pip install raksha-ai
 
 # With Phoenix integration
-pip install raksha[phoenix]
+pip install raksha-ai[phoenix]
 
 # All features
-pip install raksha[all]
+pip install raksha-ai[all]
 ```
 
 ---

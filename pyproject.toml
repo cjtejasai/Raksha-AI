@@ -84,12 +84,12 @@ dev = [
 
 # All features
 all = [
-    "raksha[phoenix]",
-    "raksha[langchain]",
-    "raksha[llamaindex]",
-    "raksha[llm]",
-    "raksha[agents]",
-    "raksha[compliance]",
+    "raksha-ai[phoenix]",
+    "raksha-ai[langchain]",
+    "raksha-ai[llamaindex]",
+    "raksha-ai[llm]",
+    "raksha-ai[agents]",
+    "raksha-ai[compliance]",
 ]
 
 [project.urls]
