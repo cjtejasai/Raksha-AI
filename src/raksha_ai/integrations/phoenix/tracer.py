@@ -1,7 +1,7 @@
 """OpenTelemetry tracer for security events"""
 
 from typing import Any, Dict, Optional
-from raksha.core.models import SecurityResult, ThreatLevel, ThreatType
+from raksha_ai.core.models import SecurityResult, ThreatLevel, ThreatType
 
 
 class SecurityTracer:

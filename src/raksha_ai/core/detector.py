@@ -2,7 +2,7 @@
 
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional
-from raksha.core.models import ThreatDetection, DetectorConfig
+from raksha_ai.core.models import ThreatDetection, DetectorConfig
 
 
 class BaseDetector(ABC):

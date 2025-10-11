@@ -2,8 +2,8 @@
 Agent security example - Detecting tool misuse, goal hijacking, and loops
 """
 
-from raksha import SecurityGuard
-from raksha.agents import (
+from raksha_ai import SecurityGuard
+from raksha_ai.agents import (
     ToolMisuseDetector,
     GoalHijackingDetector,
     RecursiveLoopDetector,

@@ -5,8 +5,8 @@ Framework-agnostic security evaluation for LLMs and AI agents.
 Protect your AI with comprehensive threat detection.
 """
 
-from raksha.scanner import SecurityScanner
-from raksha.core.models import (
+from raksha_ai.scanner import SecurityScanner
+from raksha_ai.core.models import (
     SecurityResult,
     ThreatDetection,
     ThreatLevel,

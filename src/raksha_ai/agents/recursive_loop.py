@@ -3,8 +3,8 @@
 import time
 from collections import defaultdict
 from typing import Any, Dict, List, Optional, Tuple
-from raksha.core.detector import BaseDetector
-from raksha.core.models import ThreatDetection, ThreatLevel, ThreatType
+from raksha_ai.core.detector import BaseDetector
+from raksha_ai.core.models import ThreatDetection, ThreatLevel, ThreatType
 
 
 class RecursiveLoopDetector(BaseDetector):

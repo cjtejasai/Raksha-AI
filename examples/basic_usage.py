@@ -2,7 +2,7 @@
 Basic usage example for Phoenix Security Guard
 """
 
-from raksha import (
+from raksha_ai import (
     SecurityGuard,
     PromptInjectionDetector,
     PIIDetector,

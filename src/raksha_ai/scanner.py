@@ -6,8 +6,8 @@ Framework-agnostic security scanner for LLMs and AI agents.
 
 import time
 from typing import Any, Dict, List, Optional
-from raksha.core.detector import BaseDetector
-from raksha.core.models import SecurityResult, ThreatLevel
+from raksha_ai.core.detector import BaseDetector
+from raksha_ai.core.models import SecurityResult, ThreatLevel
 
 
 class SecurityScanner:
@@ -17,7 +17,7 @@ class SecurityScanner:
     Works standalone or with any framework (Phoenix, LangChain, LlamaIndex, etc.)
 
     Example:
-        >>> from raksha import SecurityScanner
+        >>> from raksha_ai import SecurityScanner
         >>> scanner = SecurityScanner()
         >>> result = scanner.scan_input("User prompt here")
         >>> if not result.is_safe:
@@ -44,7 +44,7 @@ class SecurityScanner:
 
     def _get_default_detectors(self) -> List[BaseDetector]:
         """Get default set of detectors"""
-        from raksha.detectors import (
+        from raksha_ai.detectors import (
             PromptInjectionDetector,
             PIIDetector,
             ToxicityDetector,

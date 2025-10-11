@@ -1,15 +1,15 @@
 """Phoenix custom evaluator for security threats"""
 
 from typing import Any, Dict, List, Optional, Union
-from raksha.core.guard import SecurityGuard
-from raksha.core.models import SecurityResult
-from raksha.detectors import (
+from raksha_ai.core.guard import SecurityGuard
+from raksha_ai.core.models import SecurityResult
+from raksha_ai.detectors import (
     PromptInjectionDetector,
     PIIDetector,
     ToxicityDetector,
     DataExfiltrationDetector,
 )
-from raksha.agents import (
+from raksha_ai.agents import (
     ToolMisuseDetector,
     GoalHijackingDetector,
     RecursiveLoopDetector,

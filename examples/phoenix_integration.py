@@ -3,7 +3,7 @@ Phoenix integration example - Using security evaluator with Arize Phoenix
 """
 
 import phoenix as px
-from raksha.phoenix import PhoenixSecurityEvaluator, create_security_evaluator
+from raksha_ai.integrations.phoenix import PhoenixSecurityEvaluator, create_security_evaluator
 
 
 def main():

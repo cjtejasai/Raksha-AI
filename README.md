@@ -11,7 +11,7 @@ Raksha (रक्षा / రక్ష) means "Protection" in Sanskrit and Telug
 
 ## 🎯 What is Raksha?
 
-Raksha is a comprehensive AI security SDK that detects threats in LLMs and AI agents. It works standalone or integrates with Phoenix, LangChain, LlamaIndex, and any LLM framework.
+Raksha - AI is a comprehensive AI security SDK that detects threats in LLMs and AI agents. It works standalone or integrates with Phoenix, LangChain, LlamaIndex, and any LLM framework.
 
 ### Key Features
 
@@ -48,7 +48,7 @@ pip install raksha-ai[all]
 ### Basic Usage (30 seconds)
 
 ```python
-from raksha import SecurityScanner
+from raksha_ai import SecurityScanner
 
 # Create scanner
 scanner = SecurityScanner()
@@ -68,7 +68,7 @@ else:
 ### Complete Example
 
 ```python
-from raksha import SecurityScanner
+from raksha_ai import SecurityScanner
 
 scanner = SecurityScanner()
 
@@ -95,7 +95,7 @@ for threat in result.threats:
 
 ## 🛡️ Security Detectors
 
-Raksha includes **7 specialized detectors**:
+Raksha - AI includes **7 specialized detectors**:
 
 ### Core Detectors (4)
 
@@ -108,7 +108,7 @@ Detects jailbreak attempts and prompt manipulation:
 - Token smuggling
 
 ```python
-from raksha.detectors import PromptInjectionDetector
+from raksha_ai.detectors import PromptInjectionDetector
 
 detector = PromptInjectionDetector()
 ```
@@ -124,7 +124,7 @@ Detects personally identifiable information:
 - Private keys
 
 ```python
-from raksha.detectors import PIIDetector
+from raksha_ai.detectors import PIIDetector
 
 detector = PIIDetector()
 ```
@@ -138,7 +138,7 @@ Detects harmful and inappropriate content:
 - Harassment
 
 ```python
-from raksha.detectors import ToxicityDetector
+from raksha_ai.detectors import ToxicityDetector
 
 detector = ToxicityDetector()
 ```
@@ -152,7 +152,7 @@ Detects data extraction attempts:
 - Credential leakage
 
 ```python
-from raksha.detectors import DataExfiltrationDetector
+from raksha_ai.detectors import DataExfiltrationDetector
 
 detector = DataExfiltrationDetector()
 ```
@@ -168,7 +168,7 @@ Detects dangerous agent tool usage:
 - Resource exhaustion
 
 ```python
-from raksha.agents import ToolMisuseDetector
+from raksha_ai.agents import ToolMisuseDetector
 
 detector = ToolMisuseDetector()
 
@@ -190,7 +190,7 @@ Detects agent objective manipulation:
 - Scope creep
 
 ```python
-from raksha.agents import GoalHijackingDetector
+from raksha_ai.agents import GoalHijackingDetector
 
 detector = GoalHijackingDetector()
 
@@ -208,7 +208,7 @@ Detects infinite loops and resource abuse:
 - Unbounded recursion
 
 ```python
-from raksha.agents import RecursiveLoopDetector
+from raksha_ai.agents import RecursiveLoopDetector
 
 detector = RecursiveLoopDetector()
 ```
@@ -220,7 +220,7 @@ detector = RecursiveLoopDetector()
 ### 1. Scanning Input and Output
 
 ```python
-from raksha import SecurityScanner
+from raksha_ai import SecurityScanner
 
 scanner = SecurityScanner()
 
@@ -241,8 +241,8 @@ result = scanner.scan(
 ### 2. Custom Detector Configuration
 
 ```python
-from raksha import SecurityScanner
-from raksha.detectors import PromptInjectionDetector, PIIDetector
+from raksha_ai import SecurityScanner
+from raksha_ai.detectors import PromptInjectionDetector, PIIDetector
 
 # Use specific detectors
 scanner = SecurityScanner(detectors=[
@@ -257,14 +257,14 @@ scanner = SecurityScanner(safe_threshold=0.8)
 ### 3. Using All Detectors
 
 ```python
-from raksha import SecurityScanner
-from raksha.detectors import (
+from raksha_ai import SecurityScanner
+from raksha_ai.detectors import (
     PromptInjectionDetector,
     PIIDetector,
     ToxicityDetector,
     DataExfiltrationDetector,
 )
-from raksha.agents import (
+from raksha_ai.agents import (
     ToolMisuseDetector,
     GoalHijackingDetector,
     RecursiveLoopDetector,
@@ -321,7 +321,7 @@ if result.has_critical_threats:
 
 ```python
 import phoenix as px
-from raksha.integrations.phoenix import PhoenixSecurityEvaluator
+from raksha_ai.integrations.phoenix import PhoenixSecurityEvaluator
 
 # Launch Phoenix
 px.launch_app()
@@ -381,8 +381,8 @@ evaluator = PhoenixSecurityEvaluator(
 Create your own detection rules:
 
 ```python
-from raksha.rules import Rule, RuleEngine
-from raksha.core.models import ThreatType, ThreatLevel
+from raksha_ai.rules import Rule, RuleEngine
+from raksha_ai.core.models import ThreatType, ThreatLevel
 
 # Create rule engine
 engine = RuleEngine()
@@ -486,7 +486,7 @@ block_on_high: false
 ### Load Configuration
 
 ```python
-from raksha.utils import load_config
+from raksha_ai.utils import load_config
 from pathlib import Path
 
 config = load_config(Path("config.yaml"))
@@ -605,13 +605,13 @@ Test 3: PII Detection            ✅ PASS (Found email + SSN)
 Test 4: Toxic Content            ✅ PASS (Detected harmful content)
 
 ✅ All tests completed!
-🔱 Raksha is working correctly!
+🔱 Raksha - AI is working correctly!
 ```
 
 ### Manual Testing
 
 ```python
-from raksha import SecurityScanner
+from raksha_ai import SecurityScanner
 
 scanner = SecurityScanner()
 
@@ -780,10 +780,10 @@ Built with ❤️ for the AI security community using ancient wisdom and modern 
 
 ## 🔗 Links
 
-- **GitHub**: https://github.com/raksha-ai/raksha
-- **PyPI**: https://pypi.org/project/raksha (coming soon)
-- **Documentation**: https://raksha.ai/docs (coming soon)
+- **GitHub**: https://github.com/cjtejasai/Raksha-AI
+- **Issues**: https://github.com/cjtejasai/Raksha-AI/issues
+- **PyPI**: https://pypi.org/project/raksha-ai
 
 ---
 
-**🔱 Protect your AI with Raksha**
+**🔱 Protect your AI with Raksha-AI**

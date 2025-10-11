@@ -3,7 +3,7 @@
 import re
 from typing import Any, Callable, Dict, List, Optional
 from pydantic import BaseModel
-from raksha.core.models import ThreatDetection, ThreatLevel, ThreatType
+from raksha_ai.core.models import ThreatDetection, ThreatLevel, ThreatType
 
 
 class Rule(BaseModel):

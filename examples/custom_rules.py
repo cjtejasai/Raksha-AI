@@ -2,10 +2,10 @@
 Custom rules example - Creating and using custom threat detection rules
 """
 
-from raksha import SecurityGuard
-from raksha.detectors import PromptInjectionDetector
-from raksha.rules import Rule, RuleEngine
-from raksha.core.models import ThreatType, ThreatLevel
+from raksha_ai import SecurityGuard
+from raksha_ai.detectors import PromptInjectionDetector
+from raksha_ai.rules import Rule, RuleEngine
+from raksha_ai.core.models import ThreatType, ThreatLevel
 
 
 def main():

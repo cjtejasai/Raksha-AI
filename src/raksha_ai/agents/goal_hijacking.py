@@ -2,8 +2,8 @@
 
 import re
 from typing import Any, Dict, List, Optional
-from raksha.core.detector import BaseDetector
-from raksha.core.models import ThreatDetection, ThreatLevel, ThreatType
+from raksha_ai.core.detector import BaseDetector
+from raksha_ai.core.models import ThreatDetection, ThreatLevel, ThreatType
 
 
 class GoalHijackingDetector(BaseDetector):

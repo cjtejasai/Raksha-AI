@@ -2,7 +2,7 @@
 Quick test script for Raksha
 """
 
-from raksha import SecurityScanner
+from raksha_ai import SecurityScanner
 
 print("🔱 Raksha - AI Security SDK Test")
 print("=" * 60)
