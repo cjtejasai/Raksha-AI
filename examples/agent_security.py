@@ -2,8 +2,8 @@
 Agent security example - Detecting tool misuse, goal hijacking, and loops
 """
 
-from phoenix_security_guard import SecurityGuard
-from phoenix_security_guard.agents import (
+from raksha import SecurityGuard
+from raksha.agents import (
     ToolMisuseDetector,
     GoalHijackingDetector,
     RecursiveLoopDetector,
