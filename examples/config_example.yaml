@@ -1,0 +1,80 @@
+# Phoenix Security Guard Configuration Example
+
+# Global Settings
+safe_threshold: 0.7
+phoenix_enabled: true
+phoenix_project: "my-security-project"
+phoenix_endpoint: "http://localhost:6006"
+
+# Detector Configurations
+detectors:
+  prompt_injection:
+    enabled: true
+    threshold: 0.7
+    custom_patterns:
+      - "custom_pattern_1"
+      - "custom_pattern_2"
+    config:
+      check_jailbreak: true
+      check_system_prompt_leak: true
+
+  pii:
+    enabled: true
+    threshold: 0.8
+    config:
+      detect_emails: true
+      detect_ssn: true
+      detect_credit_cards: true
+      detect_phone_numbers: true
+
+  toxicity:
+    enabled: true
+    threshold: 0.8
+    config:
+      check_hate_speech: true
+      check_violence: true
+      check_self_harm: true
+
+  data_exfiltration:
+    enabled: true
+    threshold: 0.75
+    config:
+      check_training_data: true
+      check_system_info: true
+      check_credentials: true
+
+  tool_misuse:
+    enabled: true
+    threshold: 0.8
+    config:
+      check_dangerous_commands: true
+      check_file_operations: true
+      check_privilege_escalation: true
+
+  goal_hijacking:
+    enabled: true
+    threshold: 0.7
+    config:
+      check_goal_manipulation: true
+      check_authority_claims: true
+
+  recursive_loop:
+    enabled: true
+    threshold: 0.7
+    config:
+      max_iterations: 100
+      check_circular_patterns: true
+
+# Logging Settings
+log_level: "INFO"
+log_threats_to_file: true
+log_file_path: "security_threats.log"
+
+# Response Actions
+block_on_critical: true
+block_on_high: false
+require_approval_threshold: 0.5
+
+# Rate Limiting
+max_evaluations_per_minute: 60
+max_evaluations_per_hour: 1000
