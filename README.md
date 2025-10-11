@@ -29,9 +29,6 @@ Raksha - AI is a comprehensive AI security SDK that detects threats in LLMs and 
 
 ```bash
 # Basic installation
-pip install -e .
-
-# Or from PyPI (when published)
 pip install raksha-ai
 
 # With Phoenix integration
@@ -39,6 +36,14 @@ pip install raksha-ai[phoenix]
 
 # All features
 pip install raksha-ai[all]
+```
+
+**For development:**
+```bash
+# Clone the repository and install in editable mode
+git clone https://github.com/cjtejasai/Raksha-AI.git
+cd Raksha-AI
+pip install -e .
 ```
 
 ---
