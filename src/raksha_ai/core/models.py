@@ -29,6 +29,16 @@ class ThreatType(str, Enum):
     SYSTEM_PROMPT_LEAK = "system_prompt_leak"
     INSTRUCTION_OVERRIDE = "instruction_override"
     CONTEXT_MANIPULATION = "context_manipulation"
+    # Data Structure Injection (DSI) threats
+    DSI_SCHEMA_INJECTION = "dsi_schema_injection"
+    DSI_ARGUMENT_INJECTION = "dsi_argument_injection"
+    DSI_WORKFLOW_INJECTION = "dsi_workflow_injection"
+    DSI_TYPE_CONFUSION = "dsi_type_confusion"
+    DSI_DELIMITER_ESCAPE = "dsi_delimiter_escape"
+    DSI_SERIALIZATION_EXPLOIT = "dsi_serialization_exploit"
+    DSI_SCHEMA_VIOLATION = "dsi_schema_violation"
+    DSI_NESTED_INJECTION = "dsi_nested_injection"
+    DSI_FIELD_POLLUTION = "dsi_field_pollution"
 
 
 class ThreatDetection(BaseModel):
