@@ -49,11 +49,13 @@ class SecurityScanner:
             PIIDetector,
             ToxicityDetector,
         )
+        from raksha_ai.detectors.dsi import DSIDetector
 
         return [
             PromptInjectionDetector(),
             PIIDetector(),
             ToxicityDetector(),
+            DSIDetector(),
         ]
 
     def scan_input(
