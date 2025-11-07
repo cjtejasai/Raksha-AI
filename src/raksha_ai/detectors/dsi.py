@@ -69,10 +69,13 @@ class DSIDetector(BaseDetector):
 
     # DSI-W: Workflow injection markers
     WORKFLOW_INJECTION_PATTERNS = [
-        # YAML workflow injection
+        # YAML workflow injection (enhanced)
         r'steps:\s*\n\s*-\s*(action|command|exec)',
+        r'^\s*-\s*action:\s*(delete|exec|drop|rm)',  # YAML list with dangerous action
+        r'^\s*-\s*exec:\s*',  # YAML list with exec
         r'workflow:\s*\n',
         r'---\s*\n\s*(name|steps|actions):',
+        r'^\s*action:\s*(delete_all|drop|exec)',  # Standalone action field
 
         # XML workflow/instruction injection
         r'<workflow>',
@@ -87,29 +90,50 @@ class DSIDetector(BaseDetector):
 
     # Dangerous field names (case-insensitive)
     DANGEROUS_FIELD_NAMES = {
+        # Code execution
         'eval', 'exec', 'execute', 'system', 'shell', 'command', 'run',
+        'passthru', 'popen', 'proc_open', 'shell_exec',
+
+        # Dangerous operations
         'delete_all', 'drop', 'truncate', 'format', 'rm_rf',
+        'drop_table', 'drop_database',
+
+        # Privilege escalation
         'admin', 'root', 'superuser', 'sudo', 'privilege',
+        'is_admin', 'is_root', 'has_admin', 'elevated',
+
+        # Security bypass
         'bypass', 'override', 'force', 'skip_confirmation',
-        '__proto__', 'constructor', 'prototype',  # JS prototype pollution
-        '__import__', '__builtins__',  # Python dangerous
+        'no_confirm', 'skip_validation',
+
+        # JavaScript prototype pollution
+        '__proto__', 'constructor', 'prototype',
+        'constructor.prototype', 'object.prototype',
+
+        # Python dangerous builtins
+        '__import__', '__builtins__', '__globals__', '__locals__',
+        '__reduce__', '__setstate__', '__reduce_ex__',
+        'globals', 'locals', 'vars', 'dir',
     }
 
     # Type confusion indicators
     TYPE_CONFUSION_PATTERNS = [
-        # SQL injection in string values
-        r'["\'][^"\']*;\s*(DROP|DELETE|UPDATE|INSERT|ALTER)\s+',  # SQL commands
-        r'["\'][^"\']*["\'][\s]*;',  # String with semicolon (potential SQL)
-        r'["\'][^"\']*--',  # SQL comment in string
-        r'["\'][^"\']*\'\s+OR\s+[\'"]\d+["\']',  # OR '1'='1' style
+        # SQL injection in string values (simplified and more effective)
+        r';\s*(DROP|DELETE|UPDATE|INSERT|ALTER|EXEC|UNION|SELECT)[\s;]',  # SQL commands
+        r'--[\s"\']',  # SQL comment markers
+        r'\'\s*OR\s*[\'"\d]',  # SQL OR injection pattern
+        r';\s*--',  # Semicolon with SQL comment
 
         # Code execution in strings
-        r'["\'][^"\']*system\s*\(',  # system() call
-        r'["\'][^"\']*exec\s*\(',  # exec() call
-        r'["\'][^"\']*`[^`]+`',  # Template literal/backtick
+        r'\b(system|exec|eval|shell_exec|passthru|popen)\s*\(',  # Dangerous function calls
+        r'`[^`]+(system|exec|rm|kill|wget|curl)',  # Backtick commands
 
-        # Boolean manipulation
-        r'"(true|false)"\s*[|&]{1,2}',  # Boolean with logic operators
+        # Serialized structures in strings
+        r':\s*"[\[{][^\]}]+[}\]]"',  # JSON/array as string value
+        r'"items?":\s*"\[',  # Array as string
+
+        # Boolean/logic manipulation
+        r'"(true|false)"\s*[|&]{1,2}',  # Boolean with logic
     ]
 
     # Serialization exploit patterns
@@ -216,6 +240,14 @@ class DSIDetector(BaseDetector):
 
         # Nested structure analysis
         threats.extend(self._detect_nested_injection(text, source))
+
+        # Check for dangerous field names in parsed JSON
+        try:
+            data = json.loads(text)
+            if isinstance(data, dict):
+                threats.extend(self._check_dangerous_fields_in_data(data, source))
+        except (json.JSONDecodeError, ValueError, TypeError):
+            pass  # Not valid JSON, skip field checking
 
         return threats
 
@@ -491,6 +523,46 @@ class DSIDetector(BaseDetector):
                     mitigation="Validate field names against allowlist; reject unknown fields",
                     metadata={
                         "tool": tool_name,
+                        "dangerous_fields": dangerous_found,
+                        "field_count": len(dangerous_found)
+                    }
+                )
+            )
+
+        return threats
+
+    def _check_dangerous_fields_in_data(
+        self, data: Dict[str, Any], source: str
+    ) -> List[ThreatDetection]:
+        """Check for dangerous field names in parsed JSON data"""
+        threats = []
+        dangerous_found = []
+
+        def check_keys(obj: Any, path: str = "") -> None:
+            """Recursively check for dangerous keys"""
+            if isinstance(obj, dict):
+                for key, value in obj.items():
+                    key_lower = key.lower()
+                    if key_lower in self.DANGEROUS_FIELD_NAMES:
+                        dangerous_found.append(f"{path}.{key}" if path else key)
+                    check_keys(value, f"{path}.{key}" if path else key)
+            elif isinstance(obj, list):
+                for i, item in enumerate(obj):
+                    check_keys(item, f"{path}[{i}]")
+
+        check_keys(data)
+
+        if dangerous_found:
+            threats.append(
+                ThreatDetection(
+                    threat_type=ThreatType.DSI_FIELD_POLLUTION,
+                    level=ThreatLevel.CRITICAL,
+                    confidence=0.90,
+                    description="Dangerous field names detected in JSON structure",
+                    evidence=f"Found suspicious fields in {source}: {', '.join(dangerous_found[:5])}",
+                    mitigation="Validate field names against allowlist; reject structures with dangerous fields",
+                    metadata={
+                        "source": source,
                         "dangerous_fields": dangerous_found,
                         "field_count": len(dangerous_found)
                     }
